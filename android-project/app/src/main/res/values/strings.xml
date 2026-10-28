@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FlowWrite AI</string>
+    <string name="ime_service_label">FlowWrite AI Voice Keyboard</string>
+    <string name="ime_subtype_en_us">English (Offline AI Voice)</string>
+    <string name="privacy_password_blocked">Voice processing is disabled in password and sensitive fields.</string>
+    <string name="mic_permission_required">Microphone permission is required. Tap Settings on the keyboard to grant RECORD_AUDIO in FlowWrite AI.</string>
+</resources>

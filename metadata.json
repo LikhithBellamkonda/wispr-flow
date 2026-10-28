@@ -1,0 +1,6 @@
+{
+  "name": "Offline AI Voice Keyboard Workbench",
+  "description": "Engineering workbench, interactive Android IME simulator, and complete Kotlin/JNI/Room source repository for the Offline AI Voice Keyboard (Qwen2.5-0.5B-Instruct + llama.cpp).",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

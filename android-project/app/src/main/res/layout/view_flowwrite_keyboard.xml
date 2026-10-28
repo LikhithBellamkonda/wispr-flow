@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/keyboard_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#090D16"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="16dp">
+
+    <!-- Top Minimalist Bar: Mode Pill + Language Pill + Latency Status + Undo/Raw + Keyboard Switch -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingBottom="10dp">
+
+        <Button
+            android:id="@+id/btn_cycle_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:text="Clean"
+            android:textSize="11sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#4F46E5" />
+
+        <Button
+            android:id="@+id/btn_lang_style"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginStart="6dp"
+            android:text="Auto Mix"
+            android:textSize="11sp"
+            android:textColor="#A5B4FC"
+            android:backgroundTint="#1E293B" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:marginEnd="6dp"
+            android:text="Tap mic to speak (<5s auto-insert)"
+            android:textColor="#94A3B8"
+            android:textSize="11sp"
+            android:singleLine="true"
+            android:ellipsize="end" />
+
+        <!-- One-Tap Undo to Raw Transcript (Visible right after auto-insert) -->
+        <Button
+            android:id="@+id/btn_revert_raw"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:text="Undo"
+            android:textSize="11sp"
+            android:textColor="#FCD34D"
+            android:backgroundTint="#1E293B"
+            android:visibility="gone" />
+
+        <!-- Switch back to normal typing keyboard -->
+        <Button
+            android:id="@+id/btn_switch_ime"
+            android:layout_width="42dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="4dp"
+            android:text="⌨"
+            android:textSize="13sp"
+            android:textColor="#CBD5E1"
+            android:backgroundTint="#1E293B" />
+    </LinearLayout>
+
+    <!-- Thin Indeterminate Processing Bar (<5s budget indicator) -->
+    <ProgressBar
+        android:id="@+id/progress_inference"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
+    <!-- Primary Wispr Flow-Style Voice Pill Dock: Backspace + Giant Speak Pill + Space/Cancel -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="4dp">
+
+        <Button
+            android:id="@+id/btn_backspace"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:text="⌫"
+            android:textSize="17sp"
+            android:textColor="#E2E8F0"
+            android:backgroundTint="#1E293B" />
+
+        <Button
+            android:id="@+id/btn_mic_record"
+            android:layout_width="0dp"
+            android:layout_height="58dp"
+            android:layout_weight="1"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="🎤 Tap to Speak"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#4F46E5" />
+
+        <Button
+            android:id="@+id/btn_cancel_stop"
+            android:layout_width="68dp"
+            android:layout_height="52dp"
+            android:text="Cancel"
+            android:textSize="11sp"
+            android:textColor="#FCA5A5"
+            android:backgroundTint="#450A0A"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_space"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:text="␣"
+            android:textSize="15sp"
+            android:textColor="#E2E8F0"
+            android:backgroundTint="#1E293B" />
+    </LinearLayout>
+</LinearLayout>
