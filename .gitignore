@@ -6,3 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
+android-project/.gradle/
+android-project/app/.cxx/
+test_setup.sh
