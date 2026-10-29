@@ -43,8 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="10dp"
-            android:marginEnd="6dp"
-            android:text="Tap mic to speak (<5s auto-insert)"
+            android:layout_marginEnd="6dp"
+            android:text="Tap mic to speak (&lt;5s auto-insert)"
             android:textColor="#94A3B8"
             android:textSize="11sp"
             android:singleLine="true"
@@ -80,6 +80,29 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:indeterminate="true"
+        android:visibility="gone" />
+
+    <!-- Review Panel -->
+    <TextView
+        android:id="@+id/tv_preview_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:background="#1E293B"
+        android:padding="8dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_insert_text"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Insert Text"
+        android:textSize="13sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#059669"
         android:visibility="gone" />
 
     <!-- Primary Wispr Flow-Style Voice Pill Dock: Backspace + Giant Speak Pill + Space/Cancel -->

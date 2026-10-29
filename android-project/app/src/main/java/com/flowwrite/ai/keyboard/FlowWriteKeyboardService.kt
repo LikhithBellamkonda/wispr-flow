@@ -76,6 +76,8 @@ class FlowWriteKeyboardService : InputMethodService() {
     private var btnRevertRaw: Button? = null
     private var btnMicRecord: Button? = null
     private var btnCancelStop: Button? = null
+    private var tvPreviewText: TextView? = null
+    private var btnInsertText: Button? = null
 
     private var isCurrentFieldSensitive: Boolean = false
     private var lastRawTranscript: String? = null
@@ -127,6 +129,8 @@ class FlowWriteKeyboardService : InputMethodService() {
         btnRevertRaw = root.findViewById(R.id.btn_revert_raw)
         btnMicRecord = root.findViewById(R.id.btn_mic_record)
         btnCancelStop = root.findViewById(R.id.btn_cancel_stop)
+        tvPreviewText = root.findViewById(R.id.tv_preview_text)
+        btnInsertText = root.findViewById(R.id.btn_insert_text)
 
         val btnSwitchIme = root.findViewById<Button>(R.id.btn_switch_ime)
         val btnBackspace = root.findViewById<Button>(R.id.btn_backspace)
@@ -138,6 +142,24 @@ class FlowWriteKeyboardService : InputMethodService() {
         btnMicRecord?.setOnClickListener { onMicButtonClicked() }
         btnCancelStop?.setOnClickListener { cancelActiveOperation() }
         btnRevertRaw?.setOnClickListener { undoToRawTranscript() }
+
+        btnInsertText?.setOnClickListener {
+            val textToInsert = lastGeneratedText ?: ""
+            if (insertTextAtCursorSafely(textToInsert)) {
+                btnRevertRaw?.visibility = if (textToInsert != lastRawTranscript) View.VISIBLE else View.GONE
+                tvStatus?.text = "Inserted successfully"
+            } else {
+                tvStatus?.text = "Target field unavailable."
+            }
+
+            // Reset UI
+            tvPreviewText?.visibility = View.GONE
+            btnInsertText?.visibility = View.GONE
+            btnMicRecord?.visibility = View.VISIBLE
+            btnCancelStop?.visibility = View.GONE
+            btnMicRecord?.text = "🎤 Tap to Speak"
+            btnMicRecord?.background?.setTint(0xFF4F46E5.toInt())
+        }
 
         btnSwitchIme?.setOnClickListener {
             val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
@@ -359,16 +381,14 @@ class FlowWriteKeyboardService : InputMethodService() {
             }
 
             progressInference?.visibility = View.GONE
-            btnCancelStop?.visibility = View.GONE
             lastGeneratedText = finalOutput
 
-            // Immediately insert into the active messaging app text field!
-            if (insertTextAtCursorSafely(finalOutput)) {
-                btnRevertRaw?.visibility = if (finalOutput != rawTranscript) View.VISIBLE else View.GONE
-                tvStatus?.text = "Inserted in ${elapsedMs}ms"
-            } else {
-                tvStatus?.text = "Target field unavailable."
-            }
+            tvPreviewText?.text = finalOutput
+            tvPreviewText?.visibility = View.VISIBLE
+            btnInsertText?.visibility = View.VISIBLE
+            btnMicRecord?.visibility = View.GONE
+            btnCancelStop?.visibility = View.VISIBLE
+            tvStatus?.text = "Review and Insert (${elapsedMs}ms)"
         }
     }
 
@@ -499,6 +519,12 @@ class FlowWriteKeyboardService : InputMethodService() {
         llamaBridge.cancelActiveInference()
         activePipelineJob?.cancel()
         progressInference?.visibility = View.GONE
+
+        // Reset review UI
+        tvPreviewText?.visibility = View.GONE
+        btnInsertText?.visibility = View.GONE
+        btnMicRecord?.visibility = View.VISIBLE
+
         btnCancelStop?.visibility = View.GONE
         btnMicRecord?.text = "🎤 Tap to Speak"
         btnMicRecord?.background?.setTint(0xFF4F46E5.toInt())
